@@ -70,7 +70,7 @@ type User struct {
 ```
 // 一个实际的insert model层操作
 func (um *UserModel) Insert(user *User) (int64, error) {
-    const insertsql = `insert into `+um.table+` (`+userBuilderQueryRows+`) values(?, ?, ?)`
+    const insertsql = `insert into `+um.table+` (`+userBuilderQueryRows+`) values(?, ?, ?, ?)`
     // insert op
     res, err := um.conn.Exec(insertsql, user.Avatar, user.UserName, user.Sex, user.MobilePhone)
     if err != nil {
@@ -87,7 +87,7 @@ func (um *UserModel) Insert(user *User) (int64, error) {
 ```
 
 - 拼接 `insertsql`
-- 将 `insertsql` 以及占位符对应的 `struct field` 传入 -> `con.Exex(insertsql, field...)`
+- 将 `insertsql` 以及占位符对应的 `struct field` 传入 -> `conn.Exec(insertsql, field...)`
 
 
 :::caution
